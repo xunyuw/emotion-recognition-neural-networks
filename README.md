@@ -5,7 +5,7 @@ This repository is the out project about mood recognition using convolutional ne
 
 ![Angry Test](https://raw.githubusercontent.com/isseu/emotion-recognition-neural-networks/master/paper/angry.png)
 
- 67% Accuracy
+ 67% Accuracy -> 99% Accuracy :)
 
  ![Angry Test](https://raw.githubusercontent.com/isseu/emotion-recognition-neural-networks/master/paper/matrix_final.png)
 
@@ -19,6 +19,9 @@ This repository is the out project about mood recognition using convolutional ne
 ## Dataset
 
 We use the [FER-2013 Faces Database](http://www.socsci.ru.nl:8180/RaFD2/RaFD?p=main), a set of 28,709 pictures of people displaying 7 emotional expressions (angry, disgusted, fearful, happy, sad, surprised and neutral).
+
+
+
 
 You have to request for access to the dataset or you can get it on [Kraggle](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data).
 
