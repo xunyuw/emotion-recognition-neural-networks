@@ -24,22 +24,31 @@ class EmotionRecognition:
     print('[+] Building CNN')
     self.network = input_data(shape = [None, SIZE_FACE, SIZE_FACE, 1])
     self.network = conv_2d(self.network, 64, 5, activation = 'relu')
-    #self.network = local_response_normalization(self.network)
     self.network = max_pool_2d(self.network, 3, strides = 2)
+    self.network = local_response_normalization(self.network)
     self.network = conv_2d(self.network, 64, 5, activation = 'relu')
     self.network = max_pool_2d(self.network, 3, strides = 2)
+    self.network = local_response_normalization(self.network)
     self.network = conv_2d(self.network, 128, 4, activation = 'relu')
-    self.network = dropout(self.network, 0.3)
-    self.network = fully_connected(self.network, 3072, activation = 'relu')
+    self.network = conv_2d(self.network, 128, 4, activation = 'relu')
+    self.network = conv_2d(self.network, 128, 4, activation = 'relu')
+    self.network = max_pool_2d(self.network, 3, strides = 2)
+    self.network = local_response_normalization(self.network)
+    self.network = fully_connected(self.network, 3072, activation='tanh')
+    self.network = dropout(self.network, 0.5)
+    self.network = fully_connected(self.network, 3072, activation='tanh')
+    self.network = dropout(self.network, 0.5)
     self.network = fully_connected(self.network, len(EMOTIONS), activation = 'softmax')
     self.network = regression(self.network,
-      optimizer = 'momentum',
-      loss = 'categorical_crossentropy')
+                              optimizer = 'momentum',
+                              loss = 'categorical_crossentropy',
+                              learning_rate=0.001)
+
     self.model = tflearn.DNN(
       self.network,
       checkpoint_path = SAVE_DIRECTORY + '/emotion_recognition',
       max_checkpoints = 1,
-      tensorboard_verbose = 2
+      tensorboard_verbose = 3
     )
     self.load_model()
 
